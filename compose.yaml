@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8001:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0.42
+    restart: always
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_USER: shikamaru
+      MYSQL_PASSWORD: shadow
+      MYSQL_ROOT_PASSWORD: shadow
+    volumes:
+      - .db_data:/var/lib/mysql
+    ports:
+      - "33067:3306"
